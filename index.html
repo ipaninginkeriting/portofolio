@@ -117,23 +117,19 @@
             </div>
         </div>
 
-        <!-- STATISTIK RINGKAS -->
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 p-6 bg-white rounded-2xl border border-slate-200 shadow-sm">
+        <!-- STATISTIK RINGKAS (SIMETRIS 3 KOLOM) -->
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 p-6 bg-white rounded-2xl border border-slate-200 shadow-sm text-center">
             <div>
-                <p class="text-2xl sm:text-3xl font-extrabold text-slate-900 font-mono">Hasil Proyek</p>
-                <p class="text-xs text-slate-500 font-medium">3 Game</p>
-            </div>
-            <div>
-                <p class="text-2xl sm:text-3xl font-extrabold text-slate-900 font-mono">3D</p>
-                <p class="text-xs text-slate-500 font-medium">Spesialis Low-Poly & Assets</p>
+                <p class="text-2xl sm:text-3xl font-extrabold text-slate-900 font-mono">Game Developer</p>
+                <p class="text-xs text-slate-500 font-medium mt-1">Spesialis 3D Assets</p>
             </div>
             <div>
                 <p class="text-2xl sm:text-3xl font-extrabold text-slate-900 font-mono">TEFA</p>
-                <p class="text-xs text-slate-500 font-medium">Sekretaris TEFA Binary Coding Space</p>
+                <p class="text-xs text-slate-500 font-medium mt-1">Sekretaris TEFA Binary Coding Space</p>
             </div>
             <div>
-                <p class="text-2xl sm:text-3xl font-extrabold text-slate-900 font-mono">Dokumentasi</p>
-                <p class="text-xs text-slate-500 font-medium">Ketua tim dokumentasi TEFA Binary Coding Space</p>
+                <p class="text-2xl sm:text-3xl font-extrabold text-slate-900 font-mono">Dokumentator</p>
+                <p class="text-xs text-slate-500 font-medium mt-1">Ketua tim dokumentasi TEFA Binary Coding Space</p>
             </div>
         </div>
     </section>
@@ -359,7 +355,14 @@
                     </div>
                 </div>
 
-                <div class="mt-8 flex items-center gap-3">
+                <!-- DESKRIPSI TAMBAHAN DI BAWAH FOTO -->
+                <div class="mt-6 max-w-xl text-center px-4">
+                    <p class="text-slate-600 text-sm leading-relaxed italic">
+                        Semoga dokumentasi proses belajar ini dapat memberikan gambaran jelas mengenai komitmen dan konsistensi saya dalam mendalami dunia Game Development serta 3D Modeling.
+                    </p>
+                </div>
+
+                <div class="mt-6 flex items-center gap-3">
                     <button onclick="openDocStackModal()" class="px-5 py-2.5 bg-slate-900 hover:bg-slate-800 text-white font-semibold rounded-xl text-xs inline-flex items-center gap-2 shadow-sm transition-all">
                         <i class="fas fa-expand"></i> Buka Galeri Dokumentasi (<span id="total-doc-count">0</span> Foto)
                     </button>
@@ -496,7 +499,7 @@
             <h3 class="text-xl font-bold text-slate-900 mb-2">Network Installation - AR Learning</h3>
             <p class="text-xs font-mono text-purple-600 mb-4">Blender 3D</p>
             <div class="space-y-3 text-sm text-slate-600 leading-relaxed mb-6">
-                <p><strong>Peran Saya:</strong> 3D Asset Artist (Modeling LAN tester sebagai asset pendukung GAME).</p>
+                <p><strong>Peran Saya:</strong> 3D Artist (Modeling LAN tester sebagai asset pendukung GAME).</p>
             </div>
             <button onclick="closeModal('modal-3')" class="w-full py-2.5 bg-slate-900 text-white font-semibold rounded-lg text-sm">Tutup</button>
         </div>
@@ -551,7 +554,6 @@
         // =========================================================================
         // PENGATURAN FOTO DOKUMENTASI OTOMATIS
         // =========================================================================
-        // Cukup ubah angka '10' di bawah ini sesuai jumlah foto yang ada di folder assets/ (doc1.png, doc2.png, dst.)
         const totalFoto = 20; 
 
         const documentationPhotos = [];
