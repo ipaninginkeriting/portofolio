@@ -63,11 +63,12 @@
                 Muhammad Ilfan<span class="text-blue-600">.</span>
             </a>
             
-            <nav class="hidden md:flex items-center gap-8 text-sm font-semibold text-slate-600">
+            <nav class="hidden lg:flex items-center gap-6 text-sm font-semibold text-slate-600">
                 <a href="#about" class="hover:text-slate-900 transition-colors">Tentang</a>
                 <a href="#skills" class="hover:text-slate-900 transition-colors">Keahlian</a>
                 <a href="#hobbies" class="hover:text-slate-900 transition-colors">Hobi</a>
                 <a href="#projects" class="hover:text-slate-900 transition-colors">Proyek Karya</a>
+                <a href="#editing" class="hover:text-slate-900 transition-colors">Hasil Editing</a>
                 <a href="#documentation" class="hover:text-slate-900 transition-colors">Dokumentasi</a>
                 <a href="#experience" class="hover:text-slate-900 transition-colors">Pengalaman</a>
                 <a href="#contact" class="hover:text-slate-900 transition-colors">Kontak</a>
@@ -390,7 +391,40 @@
         </div>
     </section>
 
-    <!-- FITUR BARU: DOKUMENTASI (TUMPUKAN FOTO / STACK GALLERY) -->
+    <!-- ========================================================================= -->
+    <!-- FITUR BARU: HASIL KERJA EDITING (VIDEO & DESAIN GRAFIS)                   -->
+    <!-- ========================================================================= -->
+    <section id="editing" class="py-16 bg-slate-100/80 border-t border-slate-200">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6">
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10">
+                <div>
+                    <p class="text-indigo-600 font-mono text-xs font-bold uppercase tracking-wider mb-1">CREATIVE & MEDIA</p>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">Hasil Kerja Editing</h2>
+                    <p class="text-slate-500 text-sm mt-1">Kumpulan proyek video editing, motion graphics, dan desain publikasi.</p>
+                </div>
+
+                <!-- Tombol Filter Kategori -->
+                <div class="flex flex-wrap gap-2" id="editing-filters">
+                    <button onclick="filterEditing('all')" data-filter="all" class="filter-btn active px-3.5 py-1.5 rounded-lg text-xs font-bold bg-slate-900 text-white transition-all shadow-sm">
+                        Semua
+                    </button>
+                    <button onclick="filterEditing('video')" data-filter="video" class="filter-btn px-3.5 py-1.5 rounded-lg text-xs font-bold bg-white text-slate-600 border border-slate-200 hover:border-slate-300 transition-all">
+                        <i class="fas fa-video mr-1 text-indigo-500"></i> Video Editing
+                    </button>
+                    <button onclick="filterEditing('design')" data-filter="design" class="filter-btn px-3.5 py-1.5 rounded-lg text-xs font-bold bg-white text-slate-600 border border-slate-200 hover:border-slate-300 transition-all">
+                        <i class="fas fa-palette mr-1 text-pink-500"></i> Desain & Foto
+                    </button>
+                </div>
+            </div>
+
+            <!-- Grid Card Hasil Editing (Diisi Otomatis dari JavaScript) -->
+            <div id="editing-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Item akan dirender otomatis di sini -->
+            </div>
+        </div>
+    </section>
+
+    <!-- DOKUMENTASI (TUMPUKAN FOTO / STACK GALLERY) -->
     <section id="documentation" class="py-16 bg-white border-y border-slate-200">
         <div class="max-w-6xl mx-auto px-4 sm:px-6">
             <div class="mb-10 text-center max-w-2xl mx-auto">
@@ -616,15 +650,98 @@
     <!-- FOOTER -->
     <footer class="py-8 bg-slate-900 text-slate-400 text-xs border-t border-slate-800">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-            <p>&copy; 2026 Muhammad Ilfan. Portofolio Lamaran PKL.</p>
+            <p>© 2026 Muhammad Ilfan. Portofolio Lamaran PKL.</p>
             <p class="font-mono text-slate-500">Payakumbuh, Sumatera Barat</p>
         </div>
     </footer>
 
-    <!-- JAVASCRIPT LOGIK CAROUSEL & DOKUMENTASI STACK -->
+    <!-- JAVASCRIPT LOGIK CAROUSEL, HASIL EDITING & DOKUMENTASI STACK -->
     <script>
         // =========================================================================
-        // PENGATURAN FOTO DOKUMENTASI OTOMATIS
+        // 1. PENGATURAN LINK HASIL KERJA EDITING (TAMBAH / EDIT LINK DI SINI)
+        // =========================================================================
+        // category: 'video' (untuk video editing) atau 'design' (untuk poster/desain grafis)
+        // platform: 'YouTube', 'Google Drive', 'Instagram', 'TikTok', dll.
+        // thumbnail: path gambar di folder assets (opsional, jika dikosongkan '' akan otomatis menampilkan ikon)
+        const editingWorks = [
+            {
+                title: "Video Profil & Dokumentasi TEFA RPL",
+                category: "video",
+                platform: "Google Drive",
+                tools: "CapCut",
+                description: "Editing video dokumentasi kegiatan jurusan serta pengenalan divisi Teaching Factory Binary Coding Space.",
+                link: "https://drive.google.com/drive/folders/1or7NvO1SxaPvgDbrj6wwRG_RcFRozRzr", // <-- GANTI DENGAN LINK ASLI ANDA
+                thumbnail: "" // Contoh jika ada gambar: "assets/thumb-edit1.png"
+            },
+        ];
+
+        function renderEditingWorks(filter = 'all') {
+            const grid = document.getElementById('editing-grid');
+            grid.innerHTML = '';
+
+            const filtered = filter === 'all' 
+                ? editingWorks 
+                : editingWorks.filter(item => item.category === filter);
+
+            filtered.forEach(item => {
+                const isVideo = item.category === 'video';
+                const badgeStyle = isVideo 
+                    ? 'bg-indigo-50 text-indigo-700 border-indigo-200' 
+                    : 'bg-pink-50 text-pink-700 border-pink-200';
+                const badgeLabel = isVideo ? 'Video Editing' : 'Desain Grafis';
+                const iconClass = isVideo ? 'fa-play-circle text-indigo-400' : 'fa-palette text-pink-400';
+
+                // Tampilan bagian atas kartu (Gambar Thumbnail atau Placeholder Ikon Keren)
+                const mediaPreview = item.thumbnail 
+                    ? `<img src="${item.thumbnail}" alt="${item.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">`
+                    : `<div class="w-full h-full bg-gradient-to-br from-slate-800 to-slate-950 flex flex-col items-center justify-center p-4 group-hover:from-slate-800 group-hover:to-slate-900 transition-colors">
+                            <i class="fas ${iconClass} text-4xl mb-2 group-hover:scale-110 transition-transform"></i>
+                            <span class="text-[11px] font-mono text-slate-400">${item.platform}</span>
+                       </div>`;
+
+                const cardHTML = `
+                    <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md hover:border-indigo-300 transition-all flex flex-col justify-between group">
+                        <div>
+                            <div class="relative w-full h-44 bg-slate-900 overflow-hidden">
+                                ${mediaPreview}
+                                <span class="absolute top-3 left-3 text-[11px] font-semibold px-2.5 py-0.5 rounded-md border ${badgeStyle}">
+                                    ${badgeLabel}
+                                </span>
+                            </div>
+                            <div class="p-5">
+                                <h3 class="text-base font-bold text-slate-900 mb-1.5 group-hover:text-indigo-600 transition-colors">${item.title}</h3>
+                                <p class="text-slate-600 text-xs leading-relaxed mb-4">${item.description}</p>
+                            </div>
+                        </div>
+
+                        <div class="px-5 pb-5 pt-3 border-t border-slate-100 flex items-center justify-between gap-2">
+                            <span class="text-[10px] font-mono px-2 py-1 bg-slate-100 text-slate-600 rounded">${item.tools}</span>
+                            <a href="${item.link}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-slate-900 hover:bg-indigo-600 text-white text-xs font-semibold rounded-lg transition-colors shadow-sm">
+                                Lihat Karya <i class="fas fa-external-link-alt text-[10px]"></i>
+                            </a>
+                        </div>
+                    </div>
+                `;
+                grid.innerHTML += cardHTML;
+            });
+        }
+
+        function filterEditing(category) {
+            // Update tampilan tombol aktif
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                if (btn.dataset.filter === category) {
+                    btn.classList.remove('bg-white', 'text-slate-600', 'border', 'border-slate-200');
+                    btn.classList.add('bg-slate-900', 'text-white');
+                } else {
+                    btn.classList.remove('bg-slate-900', 'text-white');
+                    btn.classList.add('bg-white', 'text-slate-600', 'border', 'border-slate-200');
+                }
+            });
+            renderEditingWorks(category);
+        }
+
+        // =========================================================================
+        // 2. PENGATURAN FOTO DOKUMENTASI OTOMATIS
         // =========================================================================
         const totalFoto = 20; 
 
@@ -640,11 +757,13 @@
 
         let currentDocIndex = 0;
 
-        // Inisialisasi Tampilan Jumlah Foto Dokumentasi saat web dimuat
+        // Inisialisasi saat web dimuat
         document.addEventListener("DOMContentLoaded", function() {
+            // Render Hasil Kerja Editing
+            renderEditingWorks('all');
+
+            // Render Tumpukan Foto Dokumentasi
             document.getElementById('total-doc-count').innerText = documentationPhotos.length;
-            
-            // Set thumbnail awal tumpukan kartu
             if(documentationPhotos.length >= 1) document.getElementById('stack-img-1').src = documentationPhotos[0].src;
             if(documentationPhotos.length >= 2) document.getElementById('stack-img-2').src = documentationPhotos[1].src;
             if(documentationPhotos.length >= 3) document.getElementById('stack-img-3').src = documentationPhotos[2].src;
